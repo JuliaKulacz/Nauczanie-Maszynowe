@@ -158,16 +158,17 @@ class Network(object):
                 accuracy = self.accuracy(evaluation_data)
                 if accuracy > best_accuracy:
                     # Uzupełnij tutaj, pass nie bedzie Ci później potrzebne
-                    pass
+                    best_accuracy = accuracy
+                    no_accuracy_change = 0
                 else:
                     # Tutaj również coś dopisz
+                    no_accuracy_change +=1
                     print("Brak poprawy od {} epok".format(no_accuracy_change))
                 if no_accuracy_change == early_stopping_n:
                     print("Wczesne zatrzymywanie: Zatrzymano uczenie, brak poprawy skuteczności w ostatnich {} epokach"
                           .format(early_stopping_n))
                     return
-                print(
-                    "Wczesne zatrzymywanie: Najlepsza skuteczność do tej pory {}%".format(best_accuracy / n_data * 100))
+                print("Wczesne zatrzymywanie: Najlepsza skuteczność do tej pory {}%".format(best_accuracy / n_data * 100))
 
     def update_mini_batch(self, mini_batch, eta, lmbda, n):
         """Metoda aktualizująca wagi i progi w sieci na podstawie jednej porcji danych
